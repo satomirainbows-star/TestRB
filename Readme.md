@@ -44,5 +44,5 @@ git commit -m "Fix case-sensitive folder name in CI"
 git push
 
 git add .
-git commit -m "Fix Modify File Test Case "
+git commit -m "Add selenium library"
 git push

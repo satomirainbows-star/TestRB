@@ -2,10 +2,10 @@
 ${BROWSER}              headlesschrome
 ${BASE_URL}             https://practice.expandtesting.com/register
 
-${VALID_USER}           testuserPAQA
+${VALID_USER}           testuserPAQN
 ${VALID_PASSWORD}       Pass@12345
 
-${INVALID_PASSWORD}     9999
+${INVALID_PASSWORD}     999
 ${EMPTY_FIELD}          ${EMPTY}
 
 ${REGISTER_BUTTON}      xpath=//*[@id="register"]/button
