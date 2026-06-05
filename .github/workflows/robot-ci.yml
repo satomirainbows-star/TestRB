@@ -1,4 +1,4 @@
-name: Robot Framework API Tests CI
+name: Robot Framework Tests CI
 
 # 1. กำหนดเหตุการณ์ (Trigger) ที่จะให้ CI ทำงาน
 on:
