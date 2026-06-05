@@ -8,7 +8,7 @@ Resource    ../Resources/Register_variables.robot
 Open Register Page
     Open Browser    ${BASE_URL}    ${BROWSER}
     Maximize Browser Window
-    Scroll Element Into View    id=version
+    Scroll Element Into View    id=username
     Wait Until Element Is Visible    id=username
     Wait Until Element Is Visible    id=password
     Wait Until Element Is Visible    id=confirmPassword
