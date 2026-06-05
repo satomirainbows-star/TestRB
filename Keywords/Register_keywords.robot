@@ -7,6 +7,7 @@ Resource    ../Resources/Register_variables.robot
 *** Keywords ***
 Open Register Page
     Open Browser    ${BASE_URL}    ${BROWSER}
+    Set Window Size    1920    1080
     Maximize Browser Window
 
     Wait Until Element Is Visible    id=username
