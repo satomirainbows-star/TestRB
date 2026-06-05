@@ -2,7 +2,7 @@
 ${BROWSER}              headlesschrome
 ${BASE_URL}             https://practice.expandtesting.com/register
 
-${VALID_USER}           testuserPAGG
+${VALID_USER}           testuserGGSS
 ${VALID_PASSWORD}       Pass@12345
 
 ${INVALID_PASSWORD}     999
