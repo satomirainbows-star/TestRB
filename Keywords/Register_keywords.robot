@@ -32,3 +32,4 @@ Verify Flash Message
     Element Should Contain
     ...    ${FLASH_MESSAGE}
     ...    ${expected_message}
+    ...    Log To Console    ${expected_message}
