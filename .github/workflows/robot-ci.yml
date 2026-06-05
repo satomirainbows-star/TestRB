@@ -34,7 +34,7 @@ jobs:
       - name: Run Robot Framework Tests
         run: |
           mkdir -p reports
-          robot -d reports -L TRACE tests/
+          robot -d reports -L TRACE Test/
         # continue-on-error: true  # (เอาคอมเมนต์ออก หากอยากให้ CI เขียวเสมอแม้เทสพัง เพื่อให้สเต็ปอื่นทำงานต่อ)
 
       # 6. เก็บไฟล์ Report (log.html, report.html) ให้เราดาวน์โหลดไปดูหน้าเว็บได้

@@ -36,3 +36,9 @@ git commit -m "Add Robot Framework API test cases and CI workflow"
 
 # 5. ดันโค้ดขึ้น GitHub (ถ้ากิ่งหลักของคุณชื่อ master ให้เปลี่ยนคำว่า main เป็น master ครับ)
 git push -u origin main
+
+
+# หลังจากแก้ไขไฟล์
+git add .
+git commit -m "Fix case-sensitive folder name in CI"
+git push
