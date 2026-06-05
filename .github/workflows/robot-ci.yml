@@ -1,0 +1,47 @@
+name: Robot Framework API Tests CI
+
+# 1. กำหนดเหตุการณ์ (Trigger) ที่จะให้ CI ทำงาน
+on:
+  push:
+    branches: [ "main", "master" ]    # ทำงานเมื่อมีการ Push โค้ดขึ้นกิ่งหลัก
+  pull_request:
+    branches: [ "main", "master" ]    # ทำงานเมื่อมีการเปิด PR
+  workflow_dispatch:                  # อนุญาตให้เรากดปุ่มรันเอง (Manual Trigger) หน้าเว็บ GitHub ได้
+
+jobs:
+  api-testing:
+    runs-on: ubuntu-latest            # ใช้ระบบปฏิบัติการ Ubuntu ล่าสุดของ GitHub Server
+
+    steps:
+      # 2. ดึงซอร์สโค้ดจาก Repository ของคุณมาที่ Server
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 3. ติดตั้ง Python
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'      # ระบุเวอร์ชัน Python (ปรับตามที่คุณใช้ในเครื่องได้)
+
+      # 4. ติดตั้ง Robot Framework และ Library ที่จำเป็น
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install robotframework robotframework-requests
+          # หากคุณมีไฟล์ requirements.txt ให้ใช้คำสั่งนี้แทน: pip install -r requirements.txt
+
+      # 5. รันเทสเคส (ใช้คำสั่งที่คุณกำหนดไว้ และให้เก็บผลลัพธ์ลงโฟลเดอร์ reports)
+      - name: Run Robot Framework Tests
+        run: |
+          mkdir -p reports
+          robot -d reports -L TRACE tests/
+        # continue-on-error: true  # (เอาคอมเมนต์ออก หากอยากให้ CI เขียวเสมอแม้เทสพัง เพื่อให้สเต็ปอื่นทำงานต่อ)
+
+      # 6. เก็บไฟล์ Report (log.html, report.html) ให้เราดาวน์โหลดไปดูหน้าเว็บได้
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v4
+        if: always()                  # บังคับให้อัปโหลด Report เสมอ ไม่ว่าเทสจะ Pass หรือ Fail
+        with:
+          name: robot-test-reports
+          path: reports/
+          retention-days: 7           # เก็บไฟล์รีพอร์ตไว้ให้ดาวน์โหลด 7 วัน
