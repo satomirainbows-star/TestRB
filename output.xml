@@ -1,286 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.1 (Python 3.13.9 on darwin)" generated="2026-06-05T16:23:56.202302" rpa="false" schemaversion="5">
-<suite id="s1" name="Api Testing" source="/Users/nb/Project - Robotframework/Test/api_testing.robot">
-<kw name="Initialize API Session" owner="API_keywords" type="SETUP">
-<kw name="Create Session" owner="RequestsLibrary">
-<msg time="2026-06-05T16:23:56.252561" level="INFO">Creating Session using : alias=api_session, url=https://practice.expandtesting.com/notes/api, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
-<arg>api_session</arg>
+<robot generator="Robot 7.3.1 (Python 3.13.9 on darwin)" generated="2026-06-05T23:55:17.105839" rpa="false" schemaversion="5">
+<suite id="s1" name="Register" source="/Users/nb/Project - Robotframework/Test/Register.robot">
+<test id="s1-t1" name="Test Case 004: Registration with Non-matching Passwords" line="39">
+<kw name="Open Register Page" owner="Register_keywords" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-05T23:55:17.179095" level="INFO">Opening browser 'headlesschrome' to base url 'https://practice.expandtesting.com/register'.</msg>
 <arg>${BASE_URL}</arg>
-<arg>verify=True</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2026-06-05T16:23:56.252442" elapsed="0.001586"/>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-05T23:55:17.178948" elapsed="7.508060"/>
 </kw>
-<status status="PASS" start="2026-06-05T16:23:56.252194" elapsed="0.001936"/>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-05T23:55:24.687521" elapsed="0.021362"/>
 </kw>
-<test id="s1-t1" name="TC 04: Complete Notes CRUD and Lifecycle Management" line="33">
-<kw name="Login And Get Auth Headers" owner="API_keywords">
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-06-05T16:23:56.257286" level="INFO">&amp;{login_headers} = { Content-Type=application/json }</msg>
-<var>&amp;{login_headers}</var>
-<arg>Content-Type=application/json</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-06-05T16:23:56.256530" elapsed="0.002389"/>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>xpath=//*[@id="register"]/button</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-06-05T23:55:24.709045" elapsed="0.267863"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-06-05T16:23:56.259733" level="INFO">&amp;{login_payload} = { email=robot_perfect_run_001@example.com | password=UpdatedPass456! }</msg>
-<var>&amp;{login_payload}</var>
-<arg>email=${email}</arg>
-<arg>password=${password}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-06-05T16:23:56.259182" elapsed="0.000654"/>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=username</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-05T23:55:24.977100" elapsed="0.010268"/>
 </kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-06-05T16:23:56.724450" level="INFO">POST Request : url=https://practice.expandtesting.com/notes/api/users/login 
- path_url=/notes/api/users/login 
- headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '77'} 
- body=b'{"email": "robot_perfect_run_001@example.com", "password": "UpdatedPass456!"}' 
- </msg>
-<msg time="2026-06-05T16:23:56.725054" level="INFO">POST Response : url=https://practice.expandtesting.com/notes/api/users/login 
- status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH', 'access-control-allow-headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept, X-Auth-Token', 'content-type': 'application/json; charset=utf-8', 'content-encoding': 'gzip', 'etag': 'W/"f7-y3bVlnLqzyjrKdwgocYAouYEVN4"', 'set-cookie': 'express:sess=eyJmbGFzaCI6e319; path=/; httponly, express:sess.sig=tdt42nQZiQvICqmrvHQ1_16fHk0; path=/; httponly', 'date': 'Fri, 05 Jun 2026 09:23:56 GMT', 'connection': 'keep-alive', 'keep-alive': 'timeout=5', 'transfer-encoding': 'chunked'} 
- body={"success":true,"status":200,"message":"Login successful","data":{"id":"6a2295a8869ff10298498478","name":"Robot Verified Name","email":"robot_perfect_run_001@example.com","token":"64574118591f47299b94314acf500c564967adc3776942ee966d37fd45c745ee"}} 
- </msg>
-<msg time="2026-06-05T16:23:56.725430" level="INFO">${login_resp} = &lt;Response [200]&gt;</msg>
-<var>${login_resp}</var>
-<arg>api_session</arg>
-<arg>/users/login</arg>
-<arg>json=${login_payload}</arg>
-<arg>headers=${login_headers}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-06-05T16:23:56.259977" elapsed="0.465557"/>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=password</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-05T23:55:24.987523" elapsed="0.006968"/>
 </kw>
-<kw name="Status Should Be" owner="RequestsLibrary">
-<arg>200</arg>
-<arg>${login_resp}</arg>
-<doc>Fails if response status code is different than the expected.</doc>
-<status status="PASS" start="2026-06-05T16:23:56.725971" elapsed="0.000511"/>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=confirmPassword</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-05T23:55:24.994621" elapsed="0.006967"/>
 </kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-06-05T16:23:56.727453" level="INFO">${token} = 64574118591f47299b94314acf500c564967adc3776942ee966d37fd45c745ee</msg>
-<var>${token}</var>
-<arg>${login_resp.json()['data']['token']}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-06-05T16:23:56.726665" elapsed="0.000888"/>
+<status status="PASS" start="2026-06-05T23:55:17.178626" elapsed="7.823069"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-06-05T16:23:56.728087" level="INFO">&amp;{headers} = { x-auth-token=64574118591f47299b94314acf500c564967adc3776942ee966d37fd45c745ee | Content-Type=application/json }</msg>
-<var>&amp;{headers}</var>
-<arg>x-auth-token=${token}</arg>
-<arg>Content-Type=application/json</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-06-05T16:23:56.727734" elapsed="0.000444"/>
+<kw name="Register User" owner="Register_keywords">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-05T23:55:25.002568" level="INFO">Typing text 'testuserPAGG' into text field 'id=username'.</msg>
+<arg>id=username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-05T23:55:25.002430" elapsed="0.074310"/>
 </kw>
-<return>
-<value>${headers}</value>
-<status status="PASS" start="2026-06-05T16:23:56.728287" elapsed="0.000145"/>
-</return>
-<msg time="2026-06-05T16:23:56.728668" level="INFO">${auth_headers} = {'x-auth-token': '64574118591f47299b94314acf500c564967adc3776942ee966d37fd45c745ee', 'Content-Type': 'application/json'}</msg>
-<var>${auth_headers}</var>
-<arg>password=${NEW_PASSWORD}</arg>
-<status status="PASS" start="2026-06-05T16:23:56.255533" elapsed="0.473676"/>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-06-05T23:55:25.077014" level="INFO">Typing password into text field 'id=password'.</msg>
+<msg time="2026-06-05T23:55:25.085667" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-05T23:55:25.076868" elapsed="0.025492"/>
 </kw>
-<kw name="Create A New Note" owner="API_keywords">
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-06-05T16:23:56.730754" level="INFO">&amp;{note_payload} = { title=Robot Framework Test | description=Learning API Automation | category=Home }</msg>
-<var>&amp;{note_payload}</var>
-<arg>title=${title}</arg>
-<arg>description=${desc}</arg>
-<arg>category=${category}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-06-05T16:23:56.730296" elapsed="0.000579"/>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-06-05T23:55:25.102623" level="INFO">Typing password into text field 'id=confirmPassword'.</msg>
+<msg time="2026-06-05T23:55:25.112580" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=confirmPassword</arg>
+<arg>${confirm_password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-05T23:55:25.102486" elapsed="0.021673"/>
 </kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2026-06-05T16:23:57.184231" level="INFO">POST Request : url=https://practice.expandtesting.com/notes/api/notes 
- path_url=/notes/api/notes 
- headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'x-auth-token': '64574118591f47299b94314acf500c564967adc3776942ee966d37fd45c745ee', 'Content-Type': 'application/json', 'Cookie': 'express:sess=eyJmbGFzaCI6e319; express:sess.sig=tdt42nQZiQvICqmrvHQ1_16fHk0', 'Content-Length': '95'} 
- body=b'{"title": "Robot Framework Test", "description": "Learning API Automation", "category": "Home"}' 
- </msg>
-<msg time="2026-06-05T16:23:57.184361" level="INFO">POST Response : url=https://practice.expandtesting.com/notes/api/notes 
- status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH', 'access-control-allow-headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept, X-Auth-Token', 'content-type': 'application/json; charset=utf-8', 'content-encoding': 'gzip', 'etag': 'W/"14c-ck9RJrvtagUIxJHEH/N2dkRTLmI"', 'date': 'Fri, 05 Jun 2026 09:23:56 GMT', 'connection': 'keep-alive', 'keep-alive': 'timeout=5', 'transfer-encoding': 'chunked'} 
- body={"success":true,"status":200,"message":"Note successfully created","data":{"id":"6a2295ac869ff1029849848f","title":"Robot Framework Test","description":"Learning API Automation","category":"Home","completed":false,"created_at":"2026-06-05T09:23:56.920Z","updated_at":"2026-06-05T09:23:56.920Z","user_id":"6a2295a8869ff10298498478"}} 
- </msg>
-<msg time="2026-06-05T16:23:57.184449" level="INFO">${create_resp} = &lt;Response [200]&gt;</msg>
-<var>${create_resp}</var>
-<arg>api_session</arg>
-<arg>/notes</arg>
-<arg>json=${note_payload}</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-06-05T16:23:56.731052" elapsed="0.453428"/>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>xpath=//*[@id="register"]/button</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-06-05T23:55:25.124279" elapsed="0.266345"/>
 </kw>
-<kw name="Status Should Be" owner="RequestsLibrary">
-<arg>200</arg>
-<arg>${create_resp}</arg>
-<doc>Fails if response status code is different than the expected.</doc>
-<status status="PASS" start="2026-06-05T16:23:57.184570" elapsed="0.000257"/>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-05T23:55:25.391067" level="INFO">Clicking element 'xpath=//*[@id="register"]/button'.</msg>
+<arg>${REGISTER_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-05T23:55:25.390834" elapsed="0.028767"/>
 </kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-06-05T16:23:57.185212" level="INFO">${note_id} = 6a2295ac869ff1029849848f</msg>
-<var>${note_id}</var>
-<arg>${create_resp.json()['data']['id']}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-06-05T16:23:57.184911" elapsed="0.000357"/>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PASSWORD}</arg>
+<arg>${INVALID_PASSWORD}</arg>
+<status status="PASS" start="2026-06-05T23:55:25.002030" elapsed="0.417689"/>
 </kw>
-<return>
-<value>${note_id}</value>
-<status status="PASS" start="2026-06-05T16:23:57.185322" elapsed="0.000053"/>
-</return>
-<msg time="2026-06-05T16:23:57.185455" level="INFO">${note_id} = 6a2295ac869ff1029849848f</msg>
-<var>${note_id}</var>
-<arg>${auth_headers}</arg>
-<arg>${NOTE_TITLE}</arg>
-<arg>${NOTE_DESC}</arg>
-<arg>${NOTE_CATEGORY}</arg>
-<status status="PASS" start="2026-06-05T16:23:56.729725" elapsed="0.455760"/>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>xpath=//*[@id="register"]/button</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-06-05T23:55:25.419922" elapsed="1.756671"/>
 </kw>
-<kw name="Get All Notes" owner="API_keywords">
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2026-06-05T16:23:57.458222" level="INFO">GET Request : url=https://practice.expandtesting.com/notes/api/notes 
- path_url=/notes/api/notes 
- headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'x-auth-token': '64574118591f47299b94314acf500c564967adc3776942ee966d37fd45c745ee', 'Content-Type': 'application/json', 'Cookie': 'express:sess=eyJmbGFzaCI6e319; express:sess.sig=tdt42nQZiQvICqmrvHQ1_16fHk0'} 
- body=None 
- </msg>
-<msg time="2026-06-05T16:23:57.458517" level="INFO">GET Response : url=https://practice.expandtesting.com/notes/api/notes 
- status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH', 'access-control-allow-headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept, X-Auth-Token', 'content-type': 'application/json; charset=utf-8', 'content-encoding': 'gzip', 'etag': 'W/"151-ANmLwzAwtqO79TewjtJCr0Gfq4s"', 'date': 'Fri, 05 Jun 2026 09:23:57 GMT', 'connection': 'keep-alive', 'keep-alive': 'timeout=5', 'transfer-encoding': 'chunked'} 
- body={"success":true,"status":200,"message":"Notes successfully retrieved","data":[{"id":"6a2295ac869ff1029849848f","title":"Robot Framework Test","description":"Learning API Automation","category":"Home","completed":false,"created_at":"2026-06-05T09:23:56.920Z","updated_at":"2026-06-05T09:23:56.920Z","user_id":"6a2295a8869ff10298498478"}]} 
- </msg>
-<msg time="2026-06-05T16:23:57.458737" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<var>${response}</var>
-<arg>api_session</arg>
-<arg>/notes</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-06-05T16:23:57.185981" elapsed="0.272830"/>
+<kw name="Verify Flash Message" owner="Register_keywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${FLASH_MESSAGE}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-05T23:55:27.177341" elapsed="0.010123"/>
 </kw>
-<kw name="Status Should Be" owner="RequestsLibrary">
-<arg>200</arg>
-<arg>${response}</arg>
-<doc>Fails if response status code is different than the expected.</doc>
-<status status="PASS" start="2026-06-05T16:23:57.459031" elapsed="0.000277"/>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-06-05T23:55:27.197467" level="INFO">Element 'id=flash' contains text 'Passwords do not match.'.</msg>
+<arg>${FLASH_MESSAGE}</arg>
+<arg>${expected_message}</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-06-05T23:55:27.187655" elapsed="0.009954"/>
 </kw>
-<return>
-<value>${response.json()['data']}</value>
-<status status="PASS" start="2026-06-05T16:23:57.459395" elapsed="0.000088"/>
-</return>
-<msg time="2026-06-05T16:23:57.460001" level="INFO">${all_notes} = [{'id': '6a2295ac869ff1029849848f', 'title': 'Robot Framework Test', 'description': 'Learning API Automation', 'category': 'Home', 'completed': False, 'created_at': '2026-06-05T09:23:56.920Z', 'update...</msg>
-<var>${all_notes}</var>
-<arg>${auth_headers}</arg>
-<status status="PASS" start="2026-06-05T16:23:57.185727" elapsed="0.274371"/>
+<arg>Passwords do not match.</arg>
+<status status="PASS" start="2026-06-05T23:55:27.177009" elapsed="0.020686"/>
 </kw>
-<kw name="Verify Note Content By ID" owner="API_keywords">
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2026-06-05T16:23:57.796792" level="INFO">GET Request : url=https://practice.expandtesting.com/notes/api/notes/6a2295ac869ff1029849848f 
- path_url=/notes/api/notes/6a2295ac869ff1029849848f 
- headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'x-auth-token': '64574118591f47299b94314acf500c564967adc3776942ee966d37fd45c745ee', 'Content-Type': 'application/json', 'Cookie': 'express:sess=eyJmbGFzaCI6e319; express:sess.sig=tdt42nQZiQvICqmrvHQ1_16fHk0'} 
- body=None 
- </msg>
-<msg time="2026-06-05T16:23:57.797440" level="INFO">GET Response : url=https://practice.expandtesting.com/notes/api/notes/6a2295ac869ff1029849848f 
- status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH', 'access-control-allow-headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept, X-Auth-Token', 'content-type': 'application/json; charset=utf-8', 'content-encoding': 'gzip', 'etag': 'W/"14e-Wodyrj245OGz7arxOmKO1wufVz4"', 'date': 'Fri, 05 Jun 2026 09:23:57 GMT', 'connection': 'keep-alive', 'keep-alive': 'timeout=5', 'transfer-encoding': 'chunked'} 
- body={"success":true,"status":200,"message":"Note successfully retrieved","data":{"id":"6a2295ac869ff1029849848f","title":"Robot Framework Test","description":"Learning API Automation","category":"Home","completed":false,"created_at":"2026-06-05T09:23:56.920Z","updated_at":"2026-06-05T09:23:56.920Z","user_id":"6a2295a8869ff10298498478"}} 
- </msg>
-<msg time="2026-06-05T16:23:57.797844" level="INFO">${get_resp} = &lt;Response [200]&gt;</msg>
-<var>${get_resp}</var>
-<arg>api_session</arg>
-<arg>/notes/${note_id}</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-06-05T16:23:57.460942" elapsed="0.336999"/>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-06-05T23:55:27.197949" elapsed="0.074737"/>
 </kw>
-<kw name="Status Should Be" owner="RequestsLibrary">
-<arg>200</arg>
-<arg>${get_resp}</arg>
-<doc>Fails if response status code is different than the expected.</doc>
-<status status="PASS" start="2026-06-05T16:23:57.798339" elapsed="0.000423"/>
-</kw>
-<kw name="Should Be Equal As Strings" owner="BuiltIn">
-<arg>${get_resp.json()['data']['title']}</arg>
-<arg>${expected_title}</arg>
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<status status="PASS" start="2026-06-05T16:23:57.798946" elapsed="0.000840"/>
-</kw>
-<arg>${auth_headers}</arg>
-<arg>${note_id}</arg>
-<arg>${NOTE_TITLE}</arg>
-<status status="PASS" start="2026-06-05T16:23:57.460506" elapsed="0.339425"/>
-</kw>
-<kw name="Delete Note By ID" owner="API_keywords">
-<kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-06-05T16:23:58.103624" level="INFO">DELETE Request : url=https://practice.expandtesting.com/notes/api/notes/6a2295ac869ff1029849848f 
- path_url=/notes/api/notes/6a2295ac869ff1029849848f 
- headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'x-auth-token': '64574118591f47299b94314acf500c564967adc3776942ee966d37fd45c745ee', 'Content-Type': 'application/json', 'Cookie': 'express:sess=eyJmbGFzaCI6e319; express:sess.sig=tdt42nQZiQvICqmrvHQ1_16fHk0', 'Content-Length': '0'} 
- body=None 
- </msg>
-<msg time="2026-06-05T16:23:58.104288" level="INFO">DELETE Response : url=https://practice.expandtesting.com/notes/api/notes/6a2295ac869ff1029849848f 
- status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH', 'access-control-allow-headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept, X-Auth-Token', 'content-type': 'application/json; charset=utf-8', 'content-encoding': 'gzip', 'etag': 'W/"43-NRjYUraIosLt+x2lOOhDKG8vqCU"', 'date': 'Fri, 05 Jun 2026 09:23:57 GMT', 'connection': 'keep-alive', 'keep-alive': 'timeout=5', 'transfer-encoding': 'chunked'} 
- body={"success":true,"status":200,"message":"Note successfully deleted"} 
- </msg>
-<msg time="2026-06-05T16:23:58.105015" level="INFO">${delete_resp} = &lt;Response [200]&gt;</msg>
-<var>${delete_resp}</var>
-<arg>api_session</arg>
-<arg>/notes/${note_id}</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-06-05T16:23:57.800878" elapsed="0.304356"/>
-</kw>
-<kw name="Status Should Be" owner="RequestsLibrary">
-<arg>200</arg>
-<arg>${delete_resp}</arg>
-<doc>Fails if response status code is different than the expected.</doc>
-<status status="PASS" start="2026-06-05T16:23:58.105918" elapsed="0.000603"/>
-</kw>
-<arg>${auth_headers}</arg>
-<arg>${note_id}</arg>
-<status status="PASS" start="2026-06-05T16:23:57.800410" elapsed="0.306255"/>
-</kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>\n[PASS] Notes CRUD Flow Completed!</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2026-06-05T16:23:58.107055" elapsed="0.000434"/>
-</kw>
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn" type="TEARDOWN">
-<kw name="Delete User Account" owner="API_keywords">
-<kw name="DELETE On Session" owner="RequestsLibrary">
-<msg time="2026-06-05T16:23:58.422005" level="INFO">DELETE Request : url=https://practice.expandtesting.com/notes/api/users/delete-account 
- path_url=/notes/api/users/delete-account 
- headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'x-auth-token': '64574118591f47299b94314acf500c564967adc3776942ee966d37fd45c745ee', 'Content-Type': 'application/json', 'Cookie': 'express:sess=eyJmbGFzaCI6e319; express:sess.sig=tdt42nQZiQvICqmrvHQ1_16fHk0', 'Content-Length': '0'} 
- body=None 
- </msg>
-<msg time="2026-06-05T16:23:58.422407" level="INFO">DELETE Response : url=https://practice.expandtesting.com/notes/api/users/delete-account 
- status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'access-control-allow-credentials': 'true', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, PATCH', 'access-control-allow-headers': 'Origin, X-Requested-With, Authorization, Content-Type, Accept, X-Auth-Token', 'content-type': 'application/json; charset=utf-8', 'content-encoding': 'gzip', 'etag': 'W/"46-xvIiFl/4e/p/xA8LA+FZxbRy7yU"', 'date': 'Fri, 05 Jun 2026 09:23:58 GMT', 'connection': 'keep-alive', 'keep-alive': 'timeout=5', 'transfer-encoding': 'chunked'} 
- body={"success":true,"status":200,"message":"Account successfully deleted"} 
- </msg>
-<msg time="2026-06-05T16:23:58.422701" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<var>${response}</var>
-<arg>api_session</arg>
-<arg>/users/delete-account</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2026-06-05T16:23:58.108796" elapsed="0.313981"/>
-</kw>
-<kw name="Status Should Be" owner="RequestsLibrary">
-<arg>200</arg>
-<arg>${response}</arg>
-<doc>Fails if response status code is different than the expected.</doc>
-<status status="PASS" start="2026-06-05T16:23:58.423165" elapsed="0.000411"/>
-</kw>
-<arg>${auth_headers}</arg>
-<status status="PASS" start="2026-06-05T16:23:58.108380" elapsed="0.315327"/>
-</kw>
-<arg>Delete User Account</arg>
-<arg>${auth_headers}</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-06-05T16:23:58.107980" elapsed="0.315831"/>
-</kw>
-<doc>Flow: ล็อกอิน(รหัสใหม่) -&gt; สร้างโน้ต -&gt; ตรวจสอบ -&gt; ลบโน้ต</doc>
-<status status="PASS" start="2026-06-05T16:23:56.254359" elapsed="2.169751"/>
+<status status="PASS" start="2026-06-05T23:55:17.178275" elapsed="10.094555"/>
 </test>
-<doc>API Automation Testing Suite - Complete End-to-End</doc>
-<status status="PASS" start="2026-06-05T16:23:56.203960" elapsed="2.221384"/>
+<status status="PASS" start="2026-06-05T23:55:17.107369" elapsed="10.165825"/>
 </suite>
 <statistics>
 <total>
@@ -289,7 +112,7 @@
 <tag>
 </tag>
 <suite>
-<stat name="Api Testing" id="s1" pass="1" fail="0" skip="0">Api Testing</stat>
+<stat name="Register" id="s1" pass="1" fail="0" skip="0">Register</stat>
 </suite>
 </statistics>
 <errors>

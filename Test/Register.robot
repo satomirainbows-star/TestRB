@@ -41,6 +41,6 @@ Test Case 004: Registration with Non-matching Passwords
     ...    ${VALID_USER}
     ...    ${VALID_PASSWORD}
     ...    ${INVALID_PASSWORD}
-
+    Scroll Element Into View    xpath=//*[@id="register"]/button
     Verify Flash Message
     ...    Passwords do not match.

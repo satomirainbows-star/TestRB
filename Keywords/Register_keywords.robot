@@ -20,7 +20,7 @@ Register User
     Input Text        id=username           ${username}
     Input Password    id=password           ${password}
     Input Password    id=confirmPassword    ${confirm_password}
-    Scroll Element Into View    id=version
+    Scroll Element Into View    xpath=//*[@id="register"]/button
     Click Element     ${REGISTER_BUTTON}
 
 
@@ -28,8 +28,6 @@ Verify Flash Message
     [Arguments]    ${expected_message}
 
     Wait Until Element Is Visible    ${FLASH_MESSAGE}
-
     Element Should Contain
     ...    ${FLASH_MESSAGE}
     ...    ${expected_message}
-    ...    Log To Console    ${expected_message}
