@@ -1,5 +1,5 @@
 *** Variables ***
-${BROWSER}              chrome
+${BROWSER}              headlesschrome
 ${BASE_URL}             https://practice.expandtesting.com/register
 
 ${VALID_USER}           testuserPAQA
